@@ -1,7 +1,8 @@
 import argparse
-from _datetime import datetime
 import json
 
+from pymongo import MongoClient
+from _datetime import datetime
 from models import Authors, Quotes
 
 parser = argparse.ArgumentParser(description='load or find')
@@ -20,7 +21,7 @@ def load_json():
             new_author.fullname = i['fullname']
             new_author.save()
 
-    with open('json/qoutes.json', 'r', encoding='utf-8') as fh:
+    with open('json/quotes.json', 'r', encoding='utf-8') as fh:
         result = json.load(fh)
 
         for i in result:
@@ -37,8 +38,7 @@ def load_json():
 
 def find_in_db():
     while True:
-        command = input('enter command across ":" >>>')
-
+        command = input('enter command >>>')
         if command[:4] == 'exit':
             break
 
@@ -54,7 +54,7 @@ def find_in_db():
                 quotes = Quotes.objects(tags=arg[1])
                 [print(quote.to_mongo().to_dict()) for quote in quotes]
 
-            if f_name == 'tag':
+            if f_name == 'tags':
                 quotes = Quotes.objects(tags_in=arg[1].split(' '))
                 [print(quote.to_mongo().to_dict()) for quote in quotes]
 
