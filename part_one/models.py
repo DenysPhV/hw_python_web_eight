@@ -1,8 +1,9 @@
 from mongoengine import Document, CASCADE
 from mongoengine.fields import ReferenceField, DateTimeField, ListField, StringField
 
-from connect import connect
-connect(db='hw_eight_db')
+from connect import connect, user, password, domain, db_name
+
+connect(host=f"""mongodb+srv://{user}:{password}@{domain}/{db_name}?retryWrites=true&w=majority""", ssl=True)
 
 
 class Authors(Document):
