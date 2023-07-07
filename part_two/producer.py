@@ -29,7 +29,7 @@ def main():
 
     for contact in contacts:
         message = {
-            "id": contact.id,
+            "id": str(contact.id),
             "date": datetime.now().isoformat()
         }
 

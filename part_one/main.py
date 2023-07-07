@@ -55,7 +55,7 @@ def find_in_db():
                 [print(quote.to_mongo().to_dict()) for quote in quotes]
 
             if f_name == 'tags':
-                quotes = Quotes.objects(tags_in=arg[1].split(' '))
+                quotes = Quotes.objects(tags__in=arg[1].split(' '))
                 [print(quote.to_mongo().to_dict()) for quote in quotes]
 
 
